@@ -2,6 +2,7 @@ package guru.springframework.services;
 
 import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.RecipeRepository;
+import jdk.nashorn.internal.runtime.options.Option;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -33,13 +34,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public Recipe findById(Long l) {
-
-        Optional<Recipe> recipeOptional = recipeRepository.findById(l);
-
-        if (!recipeOptional.isPresent()) {
-            throw new RuntimeException("Recipe Not Found!");
-        }
-
-        return recipeOptional.get();
+        return recipeRepository.findById(l).orElse(null);
     }
+
 }
